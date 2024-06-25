@@ -1,6 +1,6 @@
 from flask import Flask, send_file, request
 from werkzeug.utils import secure_filename
-from docx2pdf import convert
+import pypandoc
 import os
 app = Flask(__name__)
 
@@ -39,7 +39,7 @@ def convert_docx_to_pdf():
         pdf_path = os.path.join(app.root_path, 'downloads', pdf_filename)
 
         # Converte o arquivo DOCX para PDF
-        convert(docx_path, pdf_path)
+        pypandoc.convert_file(docx_path, 'pdf', outputfile=pdf_path)
 
         # Envia o arquivo PDF convertido como resposta
         return send_file(pdf_path, as_attachment=True)
