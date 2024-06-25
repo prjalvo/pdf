@@ -1,8 +1,9 @@
 from flask import Flask, send_file, request
 from werkzeug.utils import secure_filename
-#import pypandoc
 import os
+import pdfkit
 
+app = Flask(__name__)
 
 @app.route('/')
 def home():
@@ -34,14 +35,17 @@ def convert_docx_to_pdf():
 
         # Caminho para o arquivo de saída PDF
         pdf_filename = f"{os.path.splitext(docx_filename)[0]}.pdf"
-        pdf_path = os.path.join(app.root_path, 'downloads', pdf_filename)
+        pdf_path = os.path.join(temp_dir, pdf_filename)
 
-        # Converte o arquivo DOCX para PDF
-        return 'Converte o arquivo DOCX para PDF', 200
-        #pypandoc.convert_file(docx_path, 'pdf', outputfile=pdf_path)
+        # Converte o arquivo DOCX para PDF usando pdfkit
+        pdfkit.from_file(docx_path, pdf_path)
 
         # Envia o arquivo PDF convertido como resposta
-        #return send_file(pdf_path, as_attachment=True)
+        return send_file(pdf_path, as_attachment=True)
 
     except Exception as e:
         return f"Erro: {e}", 500
+
+if __name__ == '__main__':
+    app.run(debug=True)
+
