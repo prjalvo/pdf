@@ -3,6 +3,6 @@
     "node": "18.x"
   },
     "scripts": {
-      "build": "bash build.sh"
+      "build": "sh build.sh"
     }
 }
