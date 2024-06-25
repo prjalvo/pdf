@@ -34,11 +34,11 @@ def convert_docx_to_pdf():
 
         # Caminho para o arquivo de saída PDF
         pdf_filename = f"{os.path.splitext(docx_filename)[0]}.pdf"
-        #pdf_path = os.path.join(app.root_path, 'downloads', pdf_filename)
+        pdf_path = os.path.join(app.root_path, 'downloads', pdf_filename)
 
         # Converte o arquivo DOCX para PDF
         return 'Converte o arquivo DOCX para PDF', 200
-        pypandoc.convert_file(docx_path, 'pdf', outputfile=pdf_path)
+        #pypandoc.convert_file(docx_path, 'pdf', outputfile=pdf_path)
 
         # Envia o arquivo PDF convertido como resposta
         return send_file(pdf_path, as_attachment=True)
