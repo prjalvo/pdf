@@ -1,23 +1,11 @@
-require('dotenv').config();
+from flask import Flask
 
-const express = require('express');
-const app = express();
+app = Flask(__name__)
 
-const bodyParser = require('body-parser');
-const path = require('path');
+@app.route('/')
+def home():
+    return 'Hello, World!'
 
-
-const urlencodedParser = bodyParser.urlencoded({ extended: false });
-
-app.use(express.static('public'));
-
-app.post('/convert', urlencodedParser, async (req, res) => {
-	try {
-		res.status(200).send('Sucesso');
-	} catch (error) {
-		console.error(error);
-		res.status(500).send('Error adding user');
-	}
-});
-app.listen(3000, () => console.log('Server ready on port 3000.'));
-module.exports = app;
+@app.route('/about')
+def about():
+    return 'About'
