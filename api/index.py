@@ -2,8 +2,6 @@ from flask import Flask, send_file, request
 from werkzeug.utils import secure_filename
 import pypandoc
 import os
-app = Flask(__name__)
-pypandoc.download_pandoc()
 
 
 @app.route('/')
