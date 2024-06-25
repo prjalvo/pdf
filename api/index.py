@@ -19,5 +19,5 @@ app.post('/convert', urlencodedParser, async (req, res) => {
 		res.status(500).send('Error adding user');
 	}
 });
-
+app.listen(3000, () => console.log('Server ready on port 3000.'));
 module.exports = app;
