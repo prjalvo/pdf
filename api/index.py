@@ -41,7 +41,7 @@ def convert_docx_to_pdf():
         #pypandoc.convert_file(docx_path, 'pdf', outputfile=pdf_path)
 
         # Envia o arquivo PDF convertido como resposta
-        return send_file(pdf_path, as_attachment=True)
+        #return send_file(pdf_path, as_attachment=True)
 
     except Exception as e:
         return f"Erro: {e}", 500
