@@ -1,17 +1,22 @@
-from flask import Flask, send_file, request
 from docx2pdf import convert
 import os
-from werkzeug.utils import secure_filename
 
-app = Flask(__name__)
+require('dotenv').config();
 
-# Configuração para permitir uploads grandes
-app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16 MB
+const express = require('express');
+const app = express();
 
-@app.route('/convert', methods=['POST'])
-def convert_docx_to_pdf():
-    try:
-        # Verifica se foi enviado um arquivo DOCX
+const bodyParser = require('body-parser');
+const path = require('path');
+
+
+const urlencodedParser = bodyParser.urlencoded({ extended: false });
+
+app.use(express.static('public'));
+
+app.post('/convert', urlencodedParser, async (req, res) => {
+	try {
+		 # Verifica se foi enviado um arquivo DOCX
         if 'file' not in request.files:
             return "Erro: Nenhum arquivo enviado.", 400
 
@@ -37,9 +42,10 @@ def convert_docx_to_pdf():
 
         # Envia o arquivo PDF convertido como resposta
         return send_file(pdf_path, as_attachment=True)
+	} catch (error) {
+		console.error(error);
+		res.status(500).send('Error adding user');
+	}
+});
 
-    except Exception as e:
-        return f"Erro: {e}", 500
-
-if __name__ == '__main__':
-    app.run(debug=True)
+module.exports = app;
