@@ -25,8 +25,12 @@ def convert_docx_to_pdf():
             return "Erro: O arquivo deve ser DOCX.", 400
 
         # Salva o arquivo DOCX em um local temporário
-        docx_filename = secure_filename(os.path.join(os.getcwd(), file.filename))
-        docx_path = os.path.join(app.root_path, 'uploads', docx_filename)
+        temp_dir = '/tmp'
+        if not os.path.exists(temp_dir):
+            os.makedirs(temp_dir)
+        
+        docx_filename = secure_filename(file.filename)
+        docx_path = os.path.join(temp_dir, docx_filename)
         file.save(docx_path)
 
         # Caminho para o arquivo de saída PDF
