@@ -2,7 +2,7 @@ from flask import Flask, send_file, request
 from werkzeug.utils import secure_filename
 import os
 import pdfkit
-pdfkit.from_url("http://google.com", "out.pdf")
+#pdfkit.from_url("http://google.com", "out.pdf")
 
 app = Flask(__name__)
 
